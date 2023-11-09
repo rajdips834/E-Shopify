@@ -1,0 +1,29 @@
+{
+    "products":[
+        {
+            "title":"T-shirt",
+            "price": 600,
+            "image":"https://dummyimage.com/720x400"
+
+        },
+        {
+            "title":"T-shirt",
+            "price": 900,
+            "image":"https://dummyimage.com/720x400"
+
+
+        },
+        {
+            "title":"T-shirt",
+            "price": 800,
+            "image":"https://dummyimage.com/720x400"
+
+
+        }
+    
+    ]
+    
+    
+
+    
+}
