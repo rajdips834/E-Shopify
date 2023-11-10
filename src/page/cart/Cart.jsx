@@ -28,7 +28,7 @@ function Cart() {
             >
               <img
                 src="https://dummyimage.com/400x400"
-                alt="product-image"
+                alt="product"
                 className="w-full rounded-lg sm:w-40"
               />
               <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">

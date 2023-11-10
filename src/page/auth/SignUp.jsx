@@ -1,15 +1,15 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import myContext from "../../context/data/myContext";
+// import myContext from "../../context/data/myContext";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const context = useContext(myContext);
-  const { loading, setLoading } = context;
+  // const context = useContext(myContext);
+  // const { loading, setLoading } = context;
   const signup = () => {};
 
   return (
