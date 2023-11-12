@@ -16,17 +16,6 @@ function Home() {
   };
   return (
     <Layout>
-      <div>
-        <button className="bg-gray-300" onClick={addCart}>
-          Add
-        </button>
-        <button className="bg-gray-300 " onClick={deleteCart}>
-          Delete
-        </button>
-        {cartItem.map((item) => (
-          <div key={item.id}>{item.name}</div>
-        ))}
-      </div>
       <HeroBanner />
       <Filter />
       <ProductList />

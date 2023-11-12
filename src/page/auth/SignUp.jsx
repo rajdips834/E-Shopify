@@ -38,6 +38,7 @@ function Signup() {
       setPassword("");
       setLoading(false);
     } catch (error) {
+      toast.error("Signup Failed");
       console.log(error);
       setLoading(false);
     }
