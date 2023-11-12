@@ -1,13 +1,39 @@
 import React from "react";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/FirebaseConfig";
+import myContext from "../../context/data/myContext";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../../components/loader/loader";
 const Login = () => {
+  const context = useContext(myContext);
+  const { toggleLoginStatus } = context;
+  console.log(toggleLoginStatus);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const signin = () => {};
+  const { loading, setLoading, setUserData } = context;
+  const navigate = useNavigate();
+  const login = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      localStorage.setItem("user", JSON.stringify(result.user));
+      setUserData(JSON.stringify(result.user));
+      toggleLoginStatus();
+      toast.success("Login successfull");
+      navigate("/");
+      setLoading(false);
+    } catch (error) {
+      toast.error("signin failed");
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
+      {loading && <Loader />}
       <div className="flex items-center justify-center h-screen ">
         \{" "}
         <div className="px-10 py-10 bg-gray-800 rounded-xl">
@@ -37,7 +63,7 @@ const Login = () => {
           </div>
           <div className="flex justify-center mb-3 ">
             <button
-              onClick={signin}
+              onClick={login}
               className="w-full px-2 py-2 font-bold text-black bg-yellow-500 rounded-lg "
             >
               Login

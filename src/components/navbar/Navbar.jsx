@@ -8,12 +8,15 @@ import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const user = localStorage.getItem("user");
 
   const context = useContext(myContext);
+  const { userData } = context;
+  console.log(userData);
   const { mode, toggleMode } = context;
   return (
-    <div className="bg-white sticky">
-      <div className="bg-white sticky top-0 z-50  ">
+    <div className="sticky bg-white">
+      <div className="sticky top-0 z-50 bg-white ">
         {/* Mobile menu */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog
@@ -44,7 +47,7 @@ const Navbar = () => {
                 leaveTo="-translate-x-full"
               >
                 <Dialog.Panel
-                  className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl"
+                  className="relative flex flex-col w-full max-w-xs pb-12 overflow-y-auto bg-white shadow-xl"
                   style={{
                     backgroundColor: mode === "dark" ? "rgb(40, 44, 52)" : "",
                     color: mode === "dark" ? "white" : "",
@@ -53,14 +56,14 @@ const Navbar = () => {
                   <div className="flex px-4 pb-2 pt-28">
                     <button
                       type="button"
-                      className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+                      className="inline-flex items-center justify-center p-2 -m-2 text-gray-400 rounded-md"
                       onClick={() => setOpen(false)}
                     >
                       <span className="sr-only">Close menu</span>
                       <RxCross2 />
                     </button>
                   </div>
-                  <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                  <div className="px-4 py-6 space-y-6 border-t border-gray-200">
                     <Link
                       to={"/allproducts"}
                       className="text-sm font-medium text-gray-900 "
@@ -72,7 +75,7 @@ const Navbar = () => {
                       <Link
                         to={"/order"}
                         style={{ color: mode === "dark" ? "white" : "" }}
-                        className="-m-2 block p-2 font-medium text-gray-900"
+                        className="block p-2 -m-2 font-medium text-gray-900"
                       >
                         Order
                       </Link>
@@ -81,7 +84,7 @@ const Navbar = () => {
                     <div className="flow-root">
                       <Link
                         to={"/dashboard"}
-                        className="-m-2 block p-2 font-medium text-gray-900"
+                        className="block p-2 -m-2 font-medium text-gray-900"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         admin
@@ -90,7 +93,7 @@ const Navbar = () => {
 
                     <div className="flow-root">
                       <a
-                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         Logout
@@ -99,7 +102,7 @@ const Navbar = () => {
                     <div className="flow-root">
                       <Link
                         to={"/"}
-                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
                       >
                         <img
                           className="inline-block w-10 h-10 rounded-full"
@@ -119,17 +122,17 @@ const Navbar = () => {
         <header className="relative bg-white">
           <nav
             aria-label="Top"
-            className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl "
+            className="px-4 bg-gray-100 shadow-xl sm:px-6 lg:px-8 "
             style={{
               backgroundColor: mode === "dark" ? "#282c34" : "",
               color: mode === "dark" ? "white" : "",
             }}
           >
             <div className="">
-              <div className="flex h-16 items-center">
+              <div className="flex items-center h-16">
                 <button
                   type="button"
-                  className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                  className="p-2 text-gray-400 bg-white rounded-md lg:hidden"
                   onClick={() => setOpen(true)}
                   style={{
                     backgroundColor: mode === "dark" ? "rgb(80 82 87)" : "",
@@ -154,11 +157,11 @@ const Navbar = () => {
                 </button>
 
                 {/* Logo */}
-                <div className="ml-4 flex lg:ml-0">
+                <div className="flex ml-4 lg:ml-0">
                   <Link to={"/"} className="flex">
                     <div className="flex ">
                       <h1
-                        className=" text-2xl font-bold text-black  px-2 py-1 rounded"
+                        className="px-2 py-1 text-2xl font-bold text-black rounded "
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
                         E-Shopify
@@ -167,7 +170,7 @@ const Navbar = () => {
                   </Link>
                 </div>
 
-                <div className="ml-auto flex items-center">
+                <div className="flex items-center ml-auto">
                   <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                     <Link
                       to={"/allproducts"}
@@ -192,7 +195,7 @@ const Navbar = () => {
                     </Link>
 
                     <a
-                      className="text-sm font-medium text-gray-700 cursor-pointer  "
+                      className="text-sm font-medium text-gray-700 cursor-pointer "
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Logout
@@ -230,10 +233,10 @@ const Navbar = () => {
                   </div>
 
                   {/* Cart */}
-                  <div className="ml-4 flow-root lg:ml-6">
+                  <div className="flow-root ml-4 lg:ml-6">
                     <Link
                       to={"/cart"}
-                      className="group -m-2 flex items-center p-2"
+                      className="flex items-center p-2 -m-2 group"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       <svg

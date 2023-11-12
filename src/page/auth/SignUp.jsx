@@ -1,19 +1,51 @@
-import React from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-// import myContext from "../../context/data/myContext";
+import myContext from "../../context/data/myContext";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, fireDB } from "../../firebase/FirebaseConfig";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import Loader from "../../components/loader/loader";
 
-const SignUp = () => {
+function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const context = useContext(myContext);
-  // const { loading, setLoading } = context;
-  const signup = () => {};
+  const context = useContext(myContext);
+  const { loading, setLoading } = context;
+
+  const signup = async () => {
+    setLoading(true);
+    if (name === "" || email === "" || password === "") {
+      return toast.error("All fields are required");
+    }
+
+    try {
+      const users = await createUserWithEmailAndPassword(auth, email, password);
+
+      const user = {
+        name: name,
+        uid: users.user.uid,
+        email: users.user.email,
+        time: Timestamp.now(),
+      };
+      const userRef = collection(fireDB, "users");
+      await addDoc(userRef, user);
+      toast.success("Signup successfull");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center h-screen ">
+      {loading && <Loader />}
       <div className="px-10 py-10 bg-gray-800 rounded-xl">
         <div className="">
           <h1 className="mb-4 text-xl font-bold text-center text-white">
@@ -69,6 +101,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-};
+}
 
-export default SignUp;
+export default Signup;
