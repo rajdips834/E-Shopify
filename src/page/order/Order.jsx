@@ -1,14 +1,81 @@
 import React from "react";
 import myContext from "../../context/data/myContext";
 import { useContext } from "react";
+import Loader from "../../components/loader/Loader";
+import Layout from "../../components/layout/Layout";
 const Order = () => {
   const context = useContext(myContext);
-  const { name, index } = context;
+  const userid = JSON.parse(localStorage.getItem("user")).uid;
+  const { mode, loading, orderList } = context;
+  console.log(orderList);
   return (
-    <div>
-      <h1>{name}</h1>
-      <h2>{index}</h2>
-    </div>
+    <Layout>
+      {loading && <Loader />}
+      {orderList.length > 0 ? (
+        <>
+          <div className="h-full pt-10 ">
+            {orderList
+              .filter((obj) => obj.userid == userid)
+              .map((order) => {
+                // order.cartItems.map()
+                return (
+                  <div className="justify-center max-w-5xl px-6 mx-auto md:flex md:space-x-6 xl:px-0">
+                    {orderList.cartItems.map((item) => {
+                      return (
+                        <div className="rounded-lg md:w-2/3">
+                          <div
+                            className="justify-between p-6 mb-6 bg-white rounded-lg shadow-md sm:flex sm:justify-start"
+                            style={{
+                              backgroundColor: mode === "dark" ? "#282c34" : "",
+                              color: mode === "dark" ? "white" : "",
+                            }}
+                          >
+                            <img
+                              src={item.imageUrl}
+                              alt="product-image"
+                              className="w-full rounded-lg sm:w-40"
+                            />
+                            <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                              <div className="mt-5 sm:mt-0">
+                                <h2
+                                  className="text-lg font-bold text-gray-900"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  {item.title}
+                                </h2>
+                                <p
+                                  className="mt-1 text-xs text-gray-700"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  {item.description}
+                                </p>
+                                <p
+                                  className="mt-1 text-xs text-gray-700"
+                                  style={{
+                                    color: mode === "dark" ? "white" : "",
+                                  }}
+                                >
+                                  {item.price}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+          </div>
+        </>
+      ) : (
+        <h2 className="text-center text-white tex-2xl">Not Order</h2>
+      )}
+    </Layout>
   );
 };
 

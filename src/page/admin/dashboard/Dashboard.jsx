@@ -7,6 +7,9 @@ import DashboardTab from "./DashboardTab";
 function Dashboard() {
   const context = useContext(myContext);
   const { mode } = context;
+  const addProduct = () => {
+    window.location.href = "/addProduct";
+  };
   return (
     <Layout>
       <section className="mt-10 mb-10 text-gray-600 body-font">

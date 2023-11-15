@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import myContext from "../../context/data/myContext";
 import ProductCard from "./ProductCard";
-import productsData from "../../data/data.json";
 
 function ProductList() {
-  console.log(productsData); // Log the data to the console
   const context = useContext(myContext);
-  const { mode } = context;
+  const { mode, productList } = context;
+  console.log(productList);
 
   return (
     <section className="text-gray-600 body-font">
@@ -22,11 +21,11 @@ function ProductList() {
         </div>
 
         <div className="flex flex-wrap -m-4">
-          {productsData.products.map((product, index) => (
+          {productList.map((item, index) => (
             <ProductCard
-              title={product.title}
-              price={product.price}
-              image={product.image}
+              title={item.title}
+              price={item.price}
+              image={item.imageUrl}
               key={index}
             />
           ))}

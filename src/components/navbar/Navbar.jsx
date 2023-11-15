@@ -15,8 +15,6 @@ function Navbar() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log(user);
-
   const logout = () => {
     localStorage.clear("user");
     window.location.href = "/login";
@@ -90,7 +88,7 @@ function Navbar() {
                     ""
                   )}
 
-                  {user?.user?.email === "rajdips834@gmail.com" ? (
+                  {user?.email === "rajdips834@gmail.com" ? (
                     <div className="flow-root">
                       <Link
                         to={"/dashboard"}
@@ -132,7 +130,7 @@ function Navbar() {
                     >
                       <img
                         className="inline-block w-10 h-10 rounded-full"
-                        src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                        src={""}
                         alt="Dan_Abromov"
                       />{" "}
                     </Link>
@@ -186,13 +184,13 @@ function Navbar() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="w-6 h-6"
                 >
                   <path
-                    strokelinecap="round"
-                    strokelinejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                   />
                 </svg>
@@ -239,7 +237,7 @@ function Navbar() {
                     </Link>
                   )}
 
-                  {user?.user?.email === "rajdips834@gmail.com" ? (
+                  {user?.email === "rajdips834@gmail.com" ? (
                     <Link
                       to={"/dashboard"}
                       className="text-sm font-medium text-gray-700 "
@@ -268,7 +266,7 @@ function Navbar() {
                   <a href="#" className="flex items-center text-gray-700 ">
                     <img
                       className="inline-block w-10 h-10 rounded-full"
-                      src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                      src={""}
                       alt="Dan_Abromov"
                     />
                   </a>

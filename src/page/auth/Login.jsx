@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/FirebaseConfig";
+import { auth } from "../../firebase/firebaseConfig";
 import myContext from "../../context/data/myContext";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Loader from "../../components/loader/loader";
+import Loader from "../../components/loader/Loader";
 const Login = () => {
   const context = useContext(myContext);
   const { toggleLoginStatus } = context;

@@ -1,8 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import myContext from "../../context/data/myContext";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addToCart } from "../../redux/cartSlice";
 const ProductCard = ({ title, price, image }) => {
   const context = useContext(myContext);
   const { mode } = context;
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  const addCart = (product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.title} added to cart`);
+  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     <div className="p-4 md:w-1/4 drop-shadow-lg ">
       <div
@@ -14,7 +27,7 @@ const ProductCard = ({ title, price, image }) => {
       >
         <div className="flex justify-center cursor-pointer">
           <img
-            className="w-full p-2 duration-300 ease-in-out  rounded-2xl h-80 hover:scale-110 transition-scale-110"
+            className="w-full p-2 duration-300 ease-in-out rounded-2xl h-80 hover:scale-110 transition-scale-110"
             src={image}
             alt="blog"
           />
@@ -35,6 +48,7 @@ const ProductCard = ({ title, price, image }) => {
           </p>
           <div className="flex justify-center ">
             <button
+              onClick={() => addCart({ title, price, image })}
               type="button"
               className="w-full py-2 text-sm font-medium text-white bg-blue-600 rounded-lg focus:outline-none hover:bg-blue-700 focus:ring-4 focus:ring-indigo-300"
             >
