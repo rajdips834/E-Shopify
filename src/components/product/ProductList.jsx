@@ -4,9 +4,8 @@ import ProductCard from "./ProductCard";
 
 function ProductList() {
   const context = useContext(myContext);
-  const { mode, productList } = context;
-  console.log(productList);
-
+  const { mode, productList, filterType, filterPrice } = context;
+  console.log(filterType);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-8 mx-auto md:py-16">
@@ -20,15 +19,17 @@ function ProductList() {
           <div className="w-20 h-1 bg-blue-600 rounded"></div>
         </div>
 
-        <div className="flex flex-wrap -m-4">
-          {productList.map((item, index) => (
-            <ProductCard
-              title={item.title}
-              price={item.price}
-              image={item.imageUrl}
-              key={index}
-            />
-          ))}
+        <div className="flex flex-wrap m-4">
+          {productList
+            .filter((item) => item.category == filterType)
+            .map((item, index) => (
+              <ProductCard
+                title={item.title}
+                price={item.price}
+                image={item.imageUrl}
+                key={index}
+              />
+            ))}
         </div>
       </div>
     </section>

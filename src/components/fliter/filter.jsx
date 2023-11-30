@@ -13,7 +13,7 @@ function Filter() {
     setFilterPrice,
     productList,
   } = context;
-
+  const resetHandler = () => {};
   return (
     <div>
       <div className="container px-4 mx-auto mt-5 ">
@@ -54,6 +54,7 @@ function Filter() {
             <button
               className="px-4 py-2 text-sm font-medium text-gray-800 rounded-md bg-gray-50hover:bg-gray-200"
               style={{ color: mode === "dark" ? "white" : "" }}
+              onClick={resetHandler()}
             >
               Reset Filter
             </button>
@@ -70,7 +71,11 @@ function Filter() {
                 }}
               >
                 {productList.map((item, index) => {
-                  return <option value={item.category}>{item.category}</option>;
+                  return (
+                    <option key={index} value={item.category}>
+                      {item.category}
+                    </option>
+                  );
                 })}
               </select>
               <select
