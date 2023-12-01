@@ -15,8 +15,8 @@ function Filter() {
   } = context;
   const resetHandler = () => {
     setSearchkey("");
-    setFilterType("");
-    setFilterPrice("");
+    setFilterType("All");
+    setFilterPrice("Any Price");
   };
   return (
     <div>

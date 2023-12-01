@@ -17,8 +17,6 @@ function Cart() {
   const cartItems = useSelector((state) => state.cart);
   const deleteCartItem = (item) => {
     dispatch(deleteFromCart(item));
-    console.log("cart Item", item);
-
     toast.success("Deleted item ");
   };
 

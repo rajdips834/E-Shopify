@@ -37,6 +37,7 @@ function Signup() {
       setEmail("");
       setPassword("");
       setLoading(false);
+      window.location.href = "/";
     } catch (error) {
       toast.error("Signup Failed");
       console.log(error);
