@@ -3,7 +3,7 @@ import myContext from "../../context/data/myContext";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../redux/cartSlice";
-const ProductCard = ({ title, price, image }) => {
+const ProductCard = ({ title, price, image, id }) => {
   const context = useContext(myContext);
   const { mode } = context;
   const dispatch = useDispatch();
@@ -25,7 +25,10 @@ const ProductCard = ({ title, price, image }) => {
           color: mode === "dark" ? "white" : "",
         }}
       >
-        <div className="flex justify-center cursor-pointer">
+        <div
+          onClick={() => (window.location.href = `/productinfo/${id}`)}
+          className="flex justify-center cursor-pointer"
+        >
           <img
             className="w-full p-2 duration-300 ease-in-out rounded-2xl h-80 hover:scale-110 transition-scale-110"
             src={image}

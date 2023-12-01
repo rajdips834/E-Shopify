@@ -28,6 +28,7 @@ function ProductList() {
                   title={item.title}
                   price={item.price}
                   image={item.imageUrl}
+                  id={item.id}
                   key={index}
                 />
               ))
