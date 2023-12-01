@@ -95,6 +95,10 @@ function Cart() {
     } catch (error) {
       console.log(error);
     }
+
+    cartItems.forEach((item) => {
+      deleteCartItem(item);
+    });
   };
 
   return (

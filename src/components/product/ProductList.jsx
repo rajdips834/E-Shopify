@@ -5,7 +5,6 @@ import ProductCard from "./ProductCard";
 function ProductList() {
   const context = useContext(myContext);
   const { mode, productList, filterType, filterPrice } = context;
-  console.log(filterType);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-8 mx-auto md:py-16">
@@ -20,16 +19,28 @@ function ProductList() {
         </div>
 
         <div className="flex flex-wrap m-4">
-          {productList
-            .filter((item) => item.category == filterType)
-            .map((item, index) => (
-              <ProductCard
-                title={item.title}
-                price={item.price}
-                image={item.imageUrl}
-                key={index}
-              />
-            ))}
+          {filterType === "" && filterPrice === ""
+            ? productList.map((item, index) => (
+                <ProductCard
+                  title={item.title}
+                  price={item.price}
+                  image={item.imageUrl}
+                  key={index}
+                />
+              ))
+            : productList
+                .filter(
+                  (item) =>
+                    item.category !== filterType && item.price !== filterPrice
+                )
+                .map((item, index) => (
+                  <ProductCard
+                    title={item.title}
+                    price={item.price}
+                    image={item.imageUrl}
+                    key={index}
+                  />
+                ))}
         </div>
       </div>
     </section>
