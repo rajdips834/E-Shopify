@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import myContext from "../../context/data/myContext";
-import { useContext } from "react";
-import Loader from "../../components/loader/Loader";
 import Layout from "../../components/layout/Layout";
-const Order = () => {
-  const context = useContext(myContext);
+import Loader from "../../components/loader/Loader";
+
+function Order() {
   const userid = JSON.parse(localStorage.getItem("user")).uid;
+  const context = useContext(myContext);
   const { mode, loading, orderList } = context;
-  console.log(orderList);
   return (
     <Layout>
       {loading && <Loader />}
@@ -16,13 +15,16 @@ const Order = () => {
           <div className="h-full pt-10 ">
             {orderList
               .filter((obj) => obj.userid == userid)
-              .map((order) => {
+              .map((order, index) => {
                 // order.cartItems.map()
                 return (
-                  <div className="justify-center max-w-5xl px-6 mx-auto md:flex md:space-x-6 xl:px-0">
-                    {orderList.cartItems.map((item) => {
+                  <div
+                    key={index}
+                    className="justify-center max-w-5xl px-6 mx-auto md:flex md:space-x-6 xl:px-0"
+                  >
+                    {order.cartItems.map((item, index) => {
                       return (
-                        <div className="rounded-lg md:w-2/3">
+                        <div key={index} className="rounded-lg md:w-2/3">
                           <div
                             className="justify-between p-6 mb-6 bg-white rounded-lg shadow-md sm:flex sm:justify-start"
                             style={{
@@ -77,6 +79,6 @@ const Order = () => {
       )}
     </Layout>
   );
-};
+}
 
 export default Order;
