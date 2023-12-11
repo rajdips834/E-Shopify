@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import myContext from "../../../context/data/myContext";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaUser, FaCartPlus } from "react-icons/fa";
-import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from "react-icons/ai";
+import { AiFillShopping } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function DashboardTab() {

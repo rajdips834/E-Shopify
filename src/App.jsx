@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,7 +18,6 @@ import UpdateProduct from "./page/admin/page/UpdateProduct";
 import AddProduct from "./page/admin/page/AddProduct";
 import AllProducts from "./page/allproducts/AllProducts";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -75,7 +74,7 @@ export default App;
 
 // user
 
-export const ProtectedRouteForUser = ({ children }) => {
+const ProtectedRouteForUser = ({ children }) => {
   const user = localStorage.getItem("user");
   if (user) {
     return children;

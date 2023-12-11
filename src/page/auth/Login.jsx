@@ -9,24 +9,30 @@ import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
 const Login = () => {
   const context = useContext(myContext);
-  const { toggleLoginStatus } = context;
-  console.log(toggleLoginStatus);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, setLoading, setUserData } = context;
+  const { loading, setLoading } = context;
   const navigate = useNavigate();
   const login = async () => {
     setLoading(true);
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem("user", JSON.stringify(result.user));
-      setUserData(JSON.stringify(result.user));
-      toggleLoginStatus();
-      toast.success("Login successfull");
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       navigate("/");
       setLoading(false);
     } catch (error) {
-      toast.error("signin failed");
+      console.log(error);
+      toast.error("Login failed");
       setLoading(false);
     }
   };

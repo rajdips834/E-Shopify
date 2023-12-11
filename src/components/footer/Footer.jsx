@@ -4,7 +4,7 @@ import myContext from "../../context/data/myContext";
 
 export default function Footer() {
   const context = useContext(myContext);
-  const { toggleMode, mode } = context;
+  const { mode } = context;
   return (
     <footer
       className="text-gray-600 bg-gray-300 body-font"

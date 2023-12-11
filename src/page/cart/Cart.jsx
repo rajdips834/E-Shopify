@@ -7,7 +7,6 @@ import { deleteFromCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import { addDoc, collection } from "firebase/firestore";
 import { fireDB } from "../../firebase/firebaseConfig";
-
 function Cart() {
   const context = useContext(myContext);
   const { mode } = context;
@@ -19,6 +18,7 @@ function Cart() {
     dispatch(deleteFromCart(item));
     toast.success("Deleted item ");
   };
+  console.log(cartItems);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -112,7 +112,7 @@ function Cart() {
         <div className="justify-center max-w-5xl px-6 mx-auto md:flex md:space-x-6 xl:px-0 ">
           <div className="rounded-lg md:w-2/3 ">
             {cartItems.map((item, index) => {
-              const { title, price, description, imageUrl } = item;
+              const { title, price, description, image } = item;
               return (
                 <div
                   className="justify-between p-6 mb-6 bg-white border rounded-lg drop-shadow-xl sm:flex sm:justify-start"
@@ -122,7 +122,7 @@ function Cart() {
                   }}
                 >
                   <img
-                    src={imageUrl}
+                    src={image}
                     alt="product-image"
                     className="w-full rounded-lg sm:w-40"
                   />

@@ -5,7 +5,6 @@ import ProductCard from "./ProductCard";
 function ProductList() {
   const context = useContext(myContext);
   const { mode, productList, filterType, filterPrice, searchkey } = context;
-  console.log(searchkey);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-8 mx-auto md:py-16">

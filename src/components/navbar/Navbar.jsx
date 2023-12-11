@@ -115,11 +115,11 @@ function Navbar() {
                   ) : (
                     <div className="flow-root">
                       <Link
-                        to={"/signup"}
+                        to={"/login"}
                         className="block p-2 -m-2 font-medium text-gray-900 cursor-pointer"
                         style={{ color: mode === "dark" ? "white" : "" }}
                       >
-                        Signup
+                        Login
                       </Link>
                     </div>
                   )}
@@ -229,11 +229,11 @@ function Navbar() {
                     </Link>
                   ) : (
                     <Link
-                      to={"/signup"}
+                      to={"/login"}
                       className="text-sm font-medium text-gray-700 "
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      Signup
+                      Login
                     </Link>
                   )}
 
@@ -263,13 +263,17 @@ function Navbar() {
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
-                  <a href="#" className="flex items-center text-gray-700 ">
-                    <img
-                      className="inline-block w-10 h-10 rounded-full"
-                      src={""}
-                      alt="Dan_Abromov"
-                    />
-                  </a>
+                  {user ? (
+                    <a href="#" className="flex items-center text-gray-700 ">
+                      <img
+                        className="inline-block w-10 h-10 rounded-full"
+                        src={""}
+                        alt="Dan_Abromov"
+                      />
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 <div className="flex lg:ml-6">
