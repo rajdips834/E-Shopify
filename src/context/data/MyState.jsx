@@ -180,9 +180,8 @@ function MyState(props) {
   }, []);
 
   const [searchkey, setSearchkey] = useState("");
-  const [filterType, setFilterType] = useState("");
-  const [filterPrice, setFilterPrice] = useState("");
-
+  const [filterType, setFilterType] = useState("All");
+  const [filterPrice, setFilterPrice] = useState("Any Price");
   return (
     <MyContext.Provider
       value={{

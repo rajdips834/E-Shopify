@@ -1,10 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import myContext from "../../context/data/myContext";
 import ProductCard from "./ProductCard";
 
 function ProductList() {
   const context = useContext(myContext);
   const { mode, productList, filterType, filterPrice, searchkey } = context;
+  var filteredProductList = productList;
+  useEffect(() => {
+    if (
+      filterType === "All" &&
+      filterPrice === "Any Price" &&
+      searchkey === ""
+    ) {
+      filteredProductList = productList;
+    } else {
+      filteredProductList = productList.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchkey) &&
+          item.category === filterType &&
+          item.price <= filterPrice
+      );
+    }
+  }, [filterType, filterPrice, searchkey]);
+
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-8 mx-auto md:py-16">
@@ -19,33 +37,16 @@ function ProductList() {
         </div>
 
         <div className="flex flex-wrap m-4">
-          {filterType === "All" &&
-          filterPrice === "Any Price" &&
-          searchkey === ""
-            ? productList.map((item, index) => (
-                <ProductCard
-                  title={item.title}
-                  price={item.price}
-                  image={item.imageUrl}
-                  id={item.id}
-                  key={index}
-                />
-              ))
-            : productList
-                .filter(
-                  (item) =>
-                    item.category !== filterType &&
-                    item.price <= filterPrice &&
-                    item.title.includes(searchkey)
-                )
-                .map((item, index) => (
-                  <ProductCard
-                    title={item.title}
-                    price={item.price}
-                    image={item.imageUrl}
-                    key={index}
-                  />
-                ))}
+          {filteredProductList.map((item, index) => {
+            return (
+              <ProductCard
+                title={item.title}
+                price={item.price}
+                image={item.imageUrl}
+                key={index}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

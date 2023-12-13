@@ -18,7 +18,6 @@ function Cart() {
     dispatch(deleteFromCart(item));
     toast.success("Deleted item ");
   };
-  console.log(cartItems);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -98,8 +97,20 @@ function Cart() {
       deleteCartItem(item);
     });
   };
+  let sortedItems = [...cartItems].sort((a, b) =>
+    a.title.localeCompare(b.title)
+  );
+  console.log(sortedItems);
 
-  const productCount = (cartItems) => {};
+  const productCount = (item) => {
+    let count = 0;
+    cartItems.forEach((cartItem) => {
+      if (cartItem.image === item.image) {
+        count++;
+      }
+    });
+    return count;
+  };
 
   return (
     <Layout>
@@ -123,6 +134,7 @@ function Cart() {
                 const { title, price, description, image } = item;
                 return (
                   <div
+                    key={index}
                     className="justify-between p-6 mb-6 bg-white border rounded-lg drop-shadow-xl sm:flex sm:justify-start"
                     style={{
                       backgroundColor: mode === "dark" ? "rgb(32 33 34)" : "",
@@ -158,7 +170,7 @@ function Cart() {
                           className="mt-1 text-xs font-semibold text-gray-700"
                           style={{ color: mode === "dark" ? "white" : "" }}
                         >
-                          {/* Quantity:{count} */}
+                          Quantity: {productCount(item)}
                         </p>
                       </div>
                       <div
