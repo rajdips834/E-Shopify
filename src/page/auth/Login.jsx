@@ -13,8 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { loading, setLoading } = context;
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
-
+  const [error, setError] = useState("");
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
@@ -85,9 +84,10 @@ const Login = () => {
           </div>
           <div className="flex justify-center mb-3 ">
             <button
-              disabled={error == null ? false : true}
+              disabled={error != null ? true : false}
               onClick={login}
-              className="w-full px-2 py-2 font-bold text-black bg-yellow-500 rounded-lg "
+              style={{ backgroundColor: error == null ? "#FFFF00" : "#808080" }}
+              className="w-full px-2 py-2 font-bold text-black rounded-lg "
             >
               Login
             </button>

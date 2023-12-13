@@ -76,6 +76,8 @@ function Filter() {
                   color: mode === "dark" ? "white" : "",
                 }}
               >
+                {" "}
+                <option value="All">All</option>
                 {productList.map((item, index) => {
                   return (
                     <option key={index} value={item.category}>
@@ -93,6 +95,7 @@ function Filter() {
                   color: mode === "dark" ? "white" : "",
                 }}
               >
+                <option value="Any Price">Any Price</option>
                 {productList.map((item, index) => {
                   return (
                     <option key={index} value={item.price}>
