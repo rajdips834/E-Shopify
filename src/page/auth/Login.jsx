@@ -13,6 +13,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { loading, setLoading } = context;
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
   const login = async () => {
     setLoading(true);
     try {
@@ -53,7 +58,15 @@ const Login = () => {
               type="email"
               name="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                if (!isValidEmail(e.target.value)) {
+                  setError("Email is invalid");
+                } else {
+                  setError(null);
+                }
+
+                setEmail(e.target.value);
+              }}
               className=" bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none"
               placeholder="Email"
             />
@@ -62,13 +75,17 @@ const Login = () => {
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               className=" bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none"
               placeholder="Password"
             />
+            {error && <h2 style={{ color: "red" }}>{error}</h2>}
           </div>
           <div className="flex justify-center mb-3 ">
             <button
+              disabled={error == null ? false : true}
               onClick={login}
               className="w-full px-2 py-2 font-bold text-black bg-yellow-500 rounded-lg "
             >
