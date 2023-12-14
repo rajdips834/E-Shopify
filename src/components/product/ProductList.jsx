@@ -1,24 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import myContext from "../../context/data/myContext";
 import ProductCard from "./ProductCard";
 
 function ProductList() {
   const context = useContext(myContext);
   const { mode, productList, filterType, filterPrice, searchkey } = context;
-  var filteredProductList = productList;
+  const [filteredProductList, setFilteredProductList] = useState(productList);
   useEffect(() => {
     if (
       filterType === "All" &&
       filterPrice === "Any Price" &&
       searchkey === ""
     ) {
-      filteredProductList = productList;
+      setFilteredProductList(productList);
     } else {
-      filteredProductList = productList.filter(
-        (item) =>
-          item.title.toLowerCase().includes(searchkey) &&
-          item.category === filterType &&
-          item.price <= filterPrice
+      setFilteredProductList(
+        productList.filter(
+          (item) =>
+            item.title.toLowerCase().includes(searchkey) &&
+            item.category === filterType &&
+            item.price <= filterPrice
+        )
       );
     }
   }, [filterType, filterPrice, searchkey]);
