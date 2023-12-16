@@ -18,7 +18,9 @@ import { fireDB } from "../../firebase/firebaseConfig";
 function MyState(props) {
   const [mode, setMode] = useState("light");
   const [userList, setUserList] = useState([]);
-
+  const [searchkey, setSearchkey] = useState("");
+  const [filterType, setFilterType] = useState("All");
+  const [filterPrice, setFilterPrice] = useState("Any Price");
   const [loading, setLoading] = useState(false);
   const [productList, setProductList] = useState([]);
   const [orderList, setOrderList] = useState([]);
@@ -179,9 +181,6 @@ function MyState(props) {
     getUserData();
   }, []);
 
-  const [searchkey, setSearchkey] = useState("");
-  const [filterType, setFilterType] = useState("All");
-  const [filterPrice, setFilterPrice] = useState("Any Price");
   return (
     <MyContext.Provider
       value={{
