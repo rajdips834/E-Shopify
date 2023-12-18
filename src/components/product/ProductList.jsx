@@ -23,7 +23,7 @@ function ProductList() {
         )
       );
     }
-  }, [filterType, filterPrice, searchkey]);
+  }, [productList, filterType, filterPrice, searchkey]);
 
   return (
     <section className="text-gray-600 body-font">
